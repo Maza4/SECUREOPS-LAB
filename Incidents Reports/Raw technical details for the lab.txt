@@ -1,0 +1,1922 @@
+Raw technical details for the lab
+
+
+
+SecureOps Lab
+
+Project subtitle
+
+A Simulated Security Operations Center for Threat Detection, Investigation, Incident Response and Security Automation
+
+The purpose is to turn the knowledge from the Google Cybersecurity Certificate into a practical portfolio project that I can publish on GitHub and later use in my LinkedIn/CV/job applications.
+
+I want this to be a real portfolio project, not a collection of random tutorials or screenshots.
+
+1. The Philosophy of the Project
+
+The core principle is:
+
+
+
+Don't just demonstrate that I learned cybersecurity. Demonstrate that I can apply it.
+
+The project should follow the workflow:
+
+
+
+PLAN
+
+  ↓
+
+DESIGN
+
+  ↓
+
+BUILD
+
+  ↓
+
+GENERATE SECURITY EVENT
+
+  ↓
+
+DETECT
+
+  ↓
+
+INVESTIGATE
+
+  ↓
+
+RESPOND
+
+  ↓
+
+AUTOMATE
+
+  ↓
+
+DOCUMENT
+
+  ↓
+
+RECOMMEND
+
+
+
+The project should feel like the work of a Junior SOC Analyst / Security Analyst, not merely a student following commands.
+
+Every activity should answer:
+
+
+
+What security problem are we solving?
+
+Why are we doing this?
+
+What evidence do we have?
+
+What happened?
+
+How did we investigate it?
+
+What did we do about it?
+
+How could it be prevented?
+
+2. Learning Style / Guidance Standard
+
+This is extremely important.
+
+The assistant should teach me while helping me build the project.
+
+Do not simply give me commands without explanation.
+
+For every major task, explain:
+
+
+
+What are we trying to achieve?
+
+Why does it matter?
+
+What does the command/tool actually do?
+
+What should I expect to see?
+
+How do I interpret the result?
+
+What should I do if the result is different?
+
+I want to understand the concepts behind the actions.
+
+The previous guide has been teaching me through actual troubleshooting rather than hiding problems. Maintain that quality.
+
+For example, when we discovered that Wazuh's manager was failing, we did not blindly reinstall it. We investigated:
+
+
+
+Network
+
+ ↓
+
+Ports
+
+ ↓
+
+Manager
+
+ ↓
+
+API
+
+ ↓
+
+modulesd
+
+ ↓
+
+wazuh-db
+
+
+
+We eventually discovered the important relationship:
+
+
+
+wazuh-modulesd
+
+       ↓
+
+needs Wazuh DB
+
+       ↓
+
+queue/db/wdb
+
+       ↓
+
+wazuh-db was unavailable
+
+
+
+Then we tested the components individually.
+
+That style of diagnosis → explanation → targeted fix should continue throughout the project.
+
+Do not assume I understand a technology simply because I know its name.
+
+3. My Current Hardware
+
+My host machine is:
+
+
+
+Windows host
+
+RAM: 16 GB
+
+CPU: Intel Core i5-3437U
+
+Physical cores: 2
+
+Logical processors: 4
+
+Storage: 512 GB SSD
+
+
+
+My available host storage is roughly:
+
+
+
+~198 GB free on C:
+
+
+
+
+
+4. Existing Virtual Machines
+
+I already have these VMs.
+
+
+
+Wazuh VM
+
+Name: Wazuh v4.14.4 OVA
+
+Wazuh version: 4.14.4
+
+RAM: 8 GB
+
+CPU: 4 vCPU
+
+Disk: 25 GB
+
+OS: Linux / Amazon Linux based appliance
+
+
+
+Wazuh dashboard is accessible through the browser.
+
+Current Wazuh lab IP:
+
+
+
+192.168.56.106
+
+
+
+
+
+The Wazuh VM now has:
+
+
+
+eth0 → 192.168.56.106/24
+
+         SecureOps Lab network
+
+
+
+eth1 → 10.0.2.15/24
+
+         VirtualBox NAT / Internet
+
+
+
+Current default route:
+
+
+
+default via 10.0.2.2 dev eth1
+
+
+
+
+
+The Wazuh VM can resolve DNS and access the Internet over NAT.
+
+Ubuntu VM
+
+Disk: ~50.2 GB virtual disk
+
+Filesystem /: ~46.3 GB
+
+Free space previously observed: ~25 GB
+
+RAM: 4 GB
+
+CPU: 2 vCPU
+
+
+
+OS:
+
+
+
+Ubuntu 16.04.7 LTS
+
+x86_64
+
+
+
+Ubuntu lab IP:
+
+
+
+192.168.56.102
+
+
+
+
+
+It currently has:
+
+
+
+Adapter 1 → NAT
+
+Adapter 2 → Host-only Adapter
+
+
+
+This machine will primarily be our:
+
+
+
+Monitored endpoint / target server
+
+We will install the Wazuh Agent on it.
+
+Kali VM
+
+Disk: ~80.1 GB
+
+RAM: 6 GB
+
+CPU: 2 vCPU
+
+
+
+Kali lab IP:
+
+
+
+192.168.56.103
+
+
+
+
+
+Current intended role:
+
+
+
+Attacker simulation + Security Analyst workstation
+
+Kali already has useful tools such as:
+
+
+
+
+
+Nmap
+
+
+
+Wireshark
+
+
+
+Python
+
+
+
+Bash
+
+
+
+Git
+
+
+
+Browser
+
+
+
+Security testing tools
+
+5. Current Virtual Network
+
+The lab uses a VirtualBox Host-Only network.
+
+Windows Host-Only adapter:
+
+
+
+IPv4: 192.168.56.105
+
+Subnet mask: 255.255.255.0
+
+DHCP server: 192.168.56.100
+
+
+
+Physical Wi-Fi is separate:
+
+
+
+172.16.153.239/24
+
+Gateway: 172.16.153.33
+
+
+
+The physical Wi-Fi network should NOT be confused with the SecureOps Lab network.
+
+Our lab network is:
+
+
+
+192.168.56.0/24
+
+
+
+
+
+Current known IPs:
+
+
+
+Windows host → 192.168.56.105
+
+Wazuh        → 192.168.56.106
+
+Ubuntu       → 192.168.56.102
+
+Kali         → 192.168.56.103
+
+
+
+Connectivity that has already been confirmed:
+
+
+
+Kali → Ubuntu    ✅
+
+Kali → Wazuh     ✅
+
+Ubuntu → Wazuh   ✅
+
+
+
+6. Network Architecture
+
+The intended architecture is:
+
+
+
+                         INTERNET
+
+                            │
+
+                       Home Wi-Fi
+
+                            │
+
+                     Windows Host
+
+                            │
+
+                    VirtualBox NAT
+
+                            │
+
+                  ┌─────────┴─────────┐
+
+                  │                   │
+
+               Wazuh                 Ubuntu/Kali
+
+                  │
+
+                  │
+
+         ┌────────┴────────┐
+
+         │  SecureOps Lab  │
+
+         │ 192.168.56.0/24 │
+
+         └────────┬────────┘
+
+                  │
+
+        ┌─────────┼─────────┐
+
+        │         │         │
+
+        ▼         ▼         ▼
+
+     Wazuh     Ubuntu      Kali
+
+     .106       .102        .103
+
+      SIEM      Target    Attacker/
+
+                          Analyst
+
+
+
+Wazuh is the centralized security monitoring platform.
+
+Ubuntu is the monitored endpoint.
+
+Kali is the attack simulation and investigation system.
+
+7. Wazuh Troubleshooting Status
+
+This part is already solved enough to continue.
+
+Originally:
+
+
+
+1514 → refused
+
+1515 → refused
+
+55000 → working
+
+
+
+Wazuh manager was timing out.
+
+We discovered:
+
+
+
+wazuh-modulesd
+
+       ↓
+
+trying to reach
+
+       ↓
+
+queue/db/wdb
+
+       ↓
+
+Connection refused
+
+
+
+The Wazuh API could run manually:
+
+
+
+Listening on 0.0.0.0:55000
+
+
+
+
+
+The modules configuration test succeeded:
+
+
+
+
+
+sudo /var/ossec/bin/wazuh-modulesd -t
+
+
+
+
+
+Then, after starting the manager:
+
+
+
+
+
+sudo /var/ossec/bin/wazuh-control start
+
+
+
+
+
+the output showed:
+
+
+
+Started wazuh-apid
+
+Started wazuh-csyslogd
+
+Started wazuh-dbd
+
+Started wazuh-integratord
+
+Started wazuh-agentlessd
+
+Started wazuh-authd
+
+Started wazuh-db
+
+Started wazuh-execd
+
+Started wazuh-analysisd
+
+Started wazuh-syscheckd
+
+Started wazuh-remoted
+
+Started wazuh-logcollector
+
+Started wazuh-monitord
+
+wazuh-modulesd already running
+
+Completed.
+
+
+
+The Wazuh database socket was also created:
+
+
+
+/var/ossec/queue/db/wdb
+
+
+
+
+
+So the manager is now running.
+
+This should be considered our current project state.
+
+Before proceeding, verify the current Wazuh status instead of assuming it is still running after a reboot.
+
+8. Main Project Goal
+
+The project should demonstrate the following cybersecurity workflow:
+
+
+
+Asset Identification
+
+       ↓
+
+Threat Modeling
+
+       ↓
+
+Risk Assessment
+
+       ↓
+
+Security Monitoring
+
+       ↓
+
+Threat Detection
+
+       ↓
+
+Investigation
+
+       ↓
+
+Incident Response
+
+       ↓
+
+Automation
+
+       ↓
+
+Documentation
+
+       ↓
+
+Security Recommendations
+
+
+
+9. Google Cybersecurity Certificate Skills We Want to Demonstrate
+
+The project should intentionally connect to the major areas covered by the certificate.
+
+
+
+Cybersecurity Foundations
+
+Demonstrate:
+
+
+
+
+
+CIA triad
+
+
+
+Security controls
+
+
+
+Threats
+
+
+
+Risk
+
+
+
+Security principles
+
+
+
+Security roles
+
+Manage Security Risks
+
+Demonstrate:
+
+
+
+
+
+Asset inventory
+
+
+
+Threat modeling
+
+
+
+Risk assessment
+
+
+
+Likelihood
+
+
+
+Impact
+
+
+
+Risk prioritization
+
+
+
+Security controls
+
+Networks and Network Security
+
+Demonstrate:
+
+
+
+
+
+IP addressing
+
+
+
+Subnets
+
+
+
+TCP/IP
+
+
+
+Ports
+
+
+
+Network traffic
+
+
+
+Network reconnaissance
+
+
+
+Network monitoring
+
+Linux
+
+Demonstrate:
+
+
+
+
+
+Linux command line
+
+
+
+File permissions
+
+
+
+Users
+
+
+
+Processes
+
+
+
+Services
+
+
+
+Logs
+
+
+
+SSH
+
+
+
+Bash
+
+SQL
+
+Demonstrate:
+
+
+
+
+
+Querying security logs
+
+
+
+Filtering events
+
+
+
+Grouping events
+
+
+
+Identifying suspicious activity
+
+
+
+Investigating authentication activity
+
+Assets, Threats and Vulnerabilities
+
+Demonstrate:
+
+
+
+
+
+Asset inventory
+
+
+
+Vulnerability identification
+
+
+
+Threat analysis
+
+
+
+Risk prioritization
+
+
+
+Mitigation
+
+Detection and Response
+
+This should be one of the strongest sections.
+
+Demonstrate:
+
+
+
+
+
+SIEM
+
+
+
+Security monitoring
+
+
+
+Alerts
+
+
+
+Detection
+
+
+
+Investigation
+
+
+
+Incident response
+
+
+
+Evidence
+
+
+
+Remediation
+
+Python Automation
+
+Use Python for a practical security automation task.
+
+For example:
+
+
+
+Security logs
+
+     ↓
+
+Python parser
+
+     ↓
+
+Filter suspicious events
+
+     ↓
+
+Analyze IPs
+
+     ↓
+
+Count failed attempts
+
+     ↓
+
+Assign severity
+
+     ↓
+
+Generate report
+
+
+
+10. Security Tools
+
+Initial tools:
+
+
+
+SIEM
+
+Wazuh
+
+
+
+IDS
+
+Suricata
+
+
+
+Network analysis
+
+Wireshark
+
+
+
+Network discovery
+
+Nmap
+
+
+
+Operating systems
+
+Ubuntu
+
+Kali Linux
+
+
+
+Programming
+
+Python
+
+Bash
+
+
+
+Data analysis
+
+SQL
+
+
+
+Virtualization
+
+VirtualBox
+
+
+
+Version control
+
+Git
+
+GitHub
+
+We should avoid adding tools just because they look impressive.
+
+Every tool should solve a specific problem.
+
+11. Main Security Scenarios
+
+The project should include several controlled incidents.
+
+
+
+Scenario 1 — SSH Brute Force
+
+Simulate repeated failed SSH authentication attempts from Kali against Ubuntu.
+
+Workflow:
+
+
+
+Kali
+
+ ↓
+
+Repeated SSH attempts
+
+ ↓
+
+Ubuntu authentication logs
+
+ ↓
+
+Wazuh Agent
+
+ ↓
+
+Wazuh Manager
+
+ ↓
+
+Alert
+
+ ↓
+
+Investigation
+
+ ↓
+
+Response
+
+ ↓
+
+Incident report
+
+
+
+Investigate:
+
+
+
+
+
+Source IP
+
+
+
+Target
+
+
+
+Username
+
+
+
+Time
+
+
+
+Number of attempts
+
+
+
+Severity
+
+
+
+Response
+
+Scenario 2 — Network Port Scanning
+
+Use Nmap from Kali against Ubuntu.
+
+Workflow:
+
+
+
+Kali
+
+ ↓
+
+Nmap reconnaissance
+
+ ↓
+
+Ubuntu
+
+ ↓
+
+Network activity
+
+ ↓
+
+Detection / analysis
+
+ ↓
+
+Investigation
+
+
+
+Investigate:
+
+
+
+
+
+Source
+
+
+
+Destination
+
+
+
+Ports
+
+
+
+Protocol
+
+
+
+Timing
+
+
+
+Attack pattern
+
+Scenario 3 — File Integrity Violation
+
+Modify a monitored file on Ubuntu.
+
+Use Wazuh File Integrity Monitoring.
+
+Workflow:
+
+
+
+File modification
+
+       ↓
+
+Wazuh FIM
+
+       ↓
+
+Alert
+
+       ↓
+
+Investigation
+
+       ↓
+
+Response
+
+
+
+Investigate:
+
+
+
+
+
+File
+
+
+
+Previous state
+
+
+
+New state
+
+
+
+User
+
+
+
+Timestamp
+
+
+
+Hash/change details
+
+Scenario 4 — Suspicious Process Activity
+
+Create controlled suspicious process activity.
+
+Investigate:
+
+
+
+
+
+Process
+
+
+
+Parent process
+
+
+
+User
+
+
+
+Command
+
+
+
+Timestamp
+
+
+
+Related logs
+
+Scenario 5 — Network Intrusion Detection
+
+Add Suricata.
+
+Workflow:
+
+
+
+Traffic
+
+ ↓
+
+Suricata
+
+ ↓
+
+IDS alert
+
+ ↓
+
+Wazuh
+
+ ↓
+
+Investigation
+
+
+
+Scenario 6 — Security Log Investigation
+
+Create/query a dataset of authentication/security events.
+
+Use SQL to answer questions such as:
+
+
+
+Which IP generated the most failed logins?
+
+
+
+Which user accounts were targeted?
+
+
+
+When did the suspicious activity occur?
+
+
+
+Which IPs should be investigated?
+
+
+
+What is the severity?
+
+
+
+Scenario 7 — Python Security Automation
+
+Build a useful Python script that automates repetitive analyst work.
+
+Possible functionality:
+
+
+
+log_analyzer.py
+
+
+
+INPUT
+
+↓
+
+authentication/security logs
+
+
+
+PROCESS
+
+↓
+
+parse
+
+↓
+
+filter
+
+↓
+
+count
+
+↓
+
+identify suspicious patterns
+
+↓
+
+calculate simple risk/severity
+
+
+
+OUTPUT
+
+↓
+
+CSV/JSON report
+
+
+
+12. Incident Report Standard
+
+Every major incident should have a professional report.
+
+Example:
+
+
+
+Incident ID: INC-001
+
+
+
+Title:
+
+SSH Brute Force Attempt
+
+
+
+Severity:
+
+HIGH
+
+
+
+Detection Source:
+
+Wazuh
+
+
+
+Affected Asset:
+
+Ubuntu Server
+
+
+
+Source IP:
+
+192.168.56.103
+
+
+
+Detection Time:
+
+...
+
+
+
+Description:
+
+...
+
+
+
+Indicators of Compromise:
+
+...
+
+
+
+Timeline:
+
+...
+
+
+
+Investigation:
+
+...
+
+
+
+Impact:
+
+...
+
+
+
+Response:
+
+...
+
+
+
+Root Cause:
+
+...
+
+
+
+Recommendations:
+
+...
+
+
+
+The report should explain both:
+
+technical evidence
+
+and
+
+analyst reasoning.
+
+13. GitHub Repository
+
+The eventual repository should look approximately like:
+
+
+
+secureops-lab/
+
+│
+
+├── README.md
+
+│
+
+├── architecture/
+
+│   ├── network-diagram.png
+
+│   └── architecture.md
+
+│
+
+├── documentation/
+
+│   ├── project-scope.md
+
+│   ├── threat-model.md
+
+│   ├── risk-assessment.md
+
+│   └── security-baseline.md
+
+│
+
+├── scenarios/
+
+│   ├── 01-ssh-bruteforce/
+
+│   ├── 02-port-scanning/
+
+│   ├── 03-file-integrity/
+
+│   ├── 04-suspicious-process/
+
+│   └── 05-network-intrusion/
+
+│
+
+├── scripts/
+
+│   ├── python/
+
+│   └── bash/
+
+│
+
+├── sql/
+
+│   └── investigation-queries.sql
+
+│
+
+├── incident-reports/
+
+│   ├── INC-001.md
+
+│   ├── INC-002.md
+
+│   └── INC-003.md
+
+│
+
+├── screenshots/
+
+│
+
+└── LICENSE
+
+
+
+14. Project Quality Standard
+
+Do NOT consider this project complete merely because:
+
+
+
+Wazuh installed
+
+Suricata installed
+
+Python script works
+
+
+
+The project is complete when it demonstrates:
+
+
+
+PLAN
+
+ ↓
+
+BUILD
+
+ ↓
+
+GENERATE EVENT
+
+ ↓
+
+DETECT
+
+ ↓
+
+INVESTIGATE
+
+ ↓
+
+RESPOND
+
+ ↓
+
+AUTOMATE
+
+ ↓
+
+DOCUMENT
+
+ ↓
+
+RECOMMEND
+
+
+
+Every major claim should have evidence.
+
+For example:
+
+Instead of:
+
+
+
+Wazuh detected brute force.
+
+Show:
+
+
+
+Attack command/process
+
++
+
+Ubuntu log
+
++
+
+Wazuh alert
+
++
+
+investigation
+
++
+
+response
+
++
+
+incident report
+
+
+
+15. Project Roadmap
+
+The original target was around 14 days, but quality is more important than the exact number of days.
+
+
+
+Phase 1 — Blueprint
+
+Completed.
+
+
+
+Phase 2 — Infrastructure
+
+Currently in progress.
+
+
+
+Phase 3 — Endpoint Monitoring
+
+Install/configure Wazuh Agent on Ubuntu.
+
+
+
+Phase 4 — First Detection
+
+SSH brute-force scenario.
+
+
+
+Phase 5 — Network Detection
+
+Nmap + Suricata + Wazuh.
+
+
+
+Phase 6 — Host Monitoring
+
+FIM + process monitoring.
+
+
+
+Phase 7 — Investigation
+
+SQL + logs + Wireshark.
+
+
+
+Phase 8 — Automation
+
+Python + Bash.
+
+
+
+Phase 9 — Incident Documentation
+
+Professional reports.
+
+
+
+Phase 10 — GitHub
+
+README, architecture, evidence and project cleanup.
+
+
+
+Phase 11 — Portfolio Presentation
+
+CV + LinkedIn post + project explanation.
+
+16. LinkedIn Goal
+
+The final LinkedIn post should not simply say:
+
+
+
+"I completed the Google Cybersecurity Certificate."
+
+It should explain that after completing the certificate, I built a practical project to apply the knowledge.
+
+Possible positioning:
+
+
+
+I recently completed the Google Cybersecurity Professional Certificate.
+
+Instead of stopping at the certificate, I decided to put the knowledge into practice by building SecureOps Lab, a simulated Security Operations Center environment.
+
+Through the project, I worked on:
+
+
+
+
+
+Security monitoring
+
+
+
+Threat detection
+
+
+
+Linux security
+
+
+
+SIEM
+
+
+
+Network analysis
+
+
+
+Incident investigation
+
+
+
+Incident response
+
+
+
+SQL
+
+
+
+Python automation
+
+I documented the project and made it available on GitHub.
+
+[GitHub link]
+
+This project represents my transition from learning cybersecurity concepts to applying them in a practical environment.
+
+The final wording will be improved later based on what I actually accomplish.
+
+17. Important Project Rule
+
+Do not fake anything.
+
+The GitHub repository should represent what I actually built and tested.
+
+Don't claim:
+
+
+
+
+
+IDS detection if we didn't test it
+
+
+
+successful attack detection if we didn't capture evidence
+
+
+
+automation if the script wasn't used
+
+
+
+incident response if we never performed it
+
+The final project should be honest and reproducible.
+
+18. Current Exact Starting Point
+
+This is where the new guide should continue.
+
+
+
+Network
+
+Wazuh  → 192.168.56.106
+
+Ubuntu → 192.168.56.102
+
+Kali   → 192.168.56.103
+
+
+
+Wazuh
+
+Version:
+
+
+
+4.14.4
+
+
+
+
+
+Manager has recently been successfully started with:
+
+
+
+
+
+sudo /var/ossec/bin/wazuh-control start
+
+
+
+
+
+and it reported all major daemons started.
+
+
+
+Next immediate objective
+
+Do NOT restart the entire project.
+
+Do NOT reinstall Wazuh.
+
+Do NOT rebuild the VMs.
+
+The next objective is:
+
+
+
+Verify Wazuh Manager is healthy, verify ports 1514/1515, and then install/enroll the Ubuntu Wazuh Agent.
+
+The target is:
+
+
+
+                Wazuh
+
+        192.168.56.106
+
+               │
+
+        ┌──────┴──────┐
+
+        │             │
+
+      1514           1515
+
+        │             │
+
+        └──────┬──────┘
+
+               │
+
+               ▼
+
+      Ubuntu Wazuh Agent
+
+        192.168.56.102
+
+               │
+
+               ▼
+
+       Active in Dashboard
+
+
+
+Once Ubuntu is an active Wazuh endpoint, the project moves into its first actual security investigation:
+
+
+
+INC-001 — SSH Brute-Force Detection and Investigation
+
+Final Instruction to the New Guide
+
+Act as my cybersecurity project mentor and technical instructor, not just a command generator.
+
+Guide me one milestone at a time.
+
+Before each technical step, explain:
+
+
+
+What we're doing
+
+Why we're doing it
+
+What the command means
+
+What result we expect
+
+How to interpret the result
+
+What happens next
+
+When something fails, diagnose it systematically instead of immediately reinstalling or changing multiple things.
+
+Keep the project tied to the Google Cybersecurity Certificate curriculum.
+
+Teach me the concepts while we build the project.
+
+Prioritize:
+
+understanding → evidence → practical skill → documentation → portfolio quality.
+
+Do not rush.
+
+The goal is to finish with a project that I can confidently put on GitHub and explain to a recruiter or interviewer. 
+

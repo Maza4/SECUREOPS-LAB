@@ -1,0 +1,38 @@
+{"timestamp" : "2026-09-05T12 : 36: 12.000623-0400", "event_type":"stats"
+ytes": 1576760, "invalid":45, "ipv4":9533, "ipv6": 152, "ethernet" : 10199, "raw":0,"null":0,"sll":0,"tcp":9338,"udp":173,"sctp":0,"icmpv4":0,"icmpv6":76,"ppp":0,"pppoe":0,"gre":
+o,"vlan":0, "vlan_qinq":0,"teredo":0,"ipv4_in_ipv6":0, "ipv6_in_ipv6":0, "mpls":0, "avg_pkt_size" : 154, "max_pkt_size" : 1518,"erspan":0}, "flow": {"memcap":0,"spare": 10000, "emerg
+mode_entered":0, "emerg_mode_over":0, "tcp_reuse":0, "memuse" : 7074880}, "defrag": {"ipv4" : {"fragments" :0, "reassembled": 0, "timeouts": 0}, "ipv6": {"fragments" : 0, "reassembled":0,
+"timeouts":0}, "max_frag_hits":0}, "tcp":{"sessions":2231, "ssn_memcap_drop":0, "pseudo": 54, "pseudo_failed":0, "invalid_checksum":0, "no_flow":0, "syn":2231, "synack":74, "rst":2
+238, "segment_memcap_drop":0, "stream_depth_reached":0,"reassembly_gap": 45, "memuse" : 1355712, "reassembly_memuse" : 12320544}, "detect": {"alert": 153}, "flow_mgr": {"closed_pruned
+":2230, "new_pruned": 82, "est_pruned":0}, "dns": {"memuse":0, "memcap_state":0, "memcap_global":0}, "http":{"memuse":0, "memcap":0}}}
+{"timestamp": "2026-09-05T12: 36:20.000410-0400", "event_type": "stats", "stats": {"uptime": 1932, "capture": {"kernel_packets": 10210, "kernel_drops": 0}, "decoder": {"pkts": 10213, "b
+ytes": 1579713, "invalid":45, "ipv4": 9547, "ipv6" : 152, "ethernet" : 10213, "raw":0,"null":0,"sll":0,"tcp":9352,"udp":173,"sctp":0,"icmpv4":0,"icmpv6":76,"ppp":0,"pppoe":0,"gre":
+o, "vlan":0,"vlan_qinq":0,"teredo":0,"ipv4_in_ipv6":0,"ipv6_in_ipv6":0, "mpls":0, "avg_pkt_size": 154, "max_pkt_size" : 1518, "erspan":0}, "flow":{"memcap":0,"spare":10000, "emerg
+_mode_entered":0,"emerg_mode_over":0, "tcp_reuse":0, "memuse" : 7074880}, "defrag": {"ipv4": {"fragments":0, "reassembled":0,"timeouts":0}, "ipv6": {"fragments":0, "reassembled":0,
+"timeouts":0}, "max_frag_hits":0}, "tcp":{"sessions":2231, "ssn_memcap_drop":0, "pseudo": 54, "pseudo_failed":0, "invalid_checksum":0, "no_flow":0, "syn":2231, "synack": 74, "rst":2
+238, "segment_memcap_drop":0, "stream_depth_reached":0, "reassembly_gap": 45, "memuse" : 1355712, "reassembly_memuse" : 12320544}, "detect": {"alert":153}, "flow_mgr": {"closed_pruned
+":2230, "new_pruned": 82, "est_pruned":0}, "dns":{"memuse":0,"memcap_state":0, "memcap_global":0},"http": {"memuse" :0, "memcap" : 0}}}
+{"timestamp": "2026-09-05T12: 36:27.000693-0400", "event_type": "stats", "stats": {"uptime":1939, "capture": {"kernel_packets": 10218, "kernel_drops":0}, "decoder": {"pkts": 10219, "b
+ytes": 1581255, "invalid": 45, "ipv4": 9553, "ipv6" : 152, "ethernet" : 10219, "raw":0,"null":0,"sll":0,"tcp":9358,"udp":173,"sctp":0,"icmpv4":0,"icmpv6":76,"ppp":0,"pppoe":0,"gre":
+o, "vlan":0,"vlan_qinq":0, "teredo":0, "ipv4_in_ipv6":0, "ipv6_in_ipv6":0, "mpls":0, "avg_pkt_size": 154, "max_pkt_size" : 1518, "erspan":0}, "flow":{"memcap":0,"spare": 10000, "emerg
+_mode_entered":0, "emerg_mode_over":0,"tcp_reuse":0, "memuse" : 7074880}, "defrag": {"ipv4": {"fragments":0, "reassembled":0, "timeouts":0}, "ipv6": {"fragments":0, "reassembled":0,
+"timeouts":0}, "max_frag_hits":0}, "tcp":{"sessions": 2231, "ssn_memcap_drop":0, "pseudo": 54, "pseudo_failed":0, "invalid_checksum":0, "no_flow":0, "syn": 2231, "synack": 74, "rst":2
+238, "segment_memcap_drop":0, "stream_depth_reached":0, "reassembly_gap": 45, "memuse" : 1355712, "reassembly_memuse" : 12320544}, "detect": {"alert": 153}, "flow_mgr": {"closed_pruned
+":2230,"new_pruned": 82,"est_pruned":0}, "dns":{"memuse":0,"memcap_state":0,"memcap_global":0},"http":{"memuse":0,"memcap":0}}}
+{"timestamp": "2026-09-05T12: 36:34.001288-0400", "event_type":"stats","stats":{"uptime": 1946, "capture": {"kernel_packets": 10230, "kernel_drops":0}, "decoder": {"pkts": 10231, "b
+ytes": 1583843, "invalid": 45, "ipv4": 9565, "ipv6": 152, "ethernet" : 10231, "raw":0,"null":0,"sll":0,"tcp":9370,"udp":173,"sctp":0,"icmpv4":0,"icmpv6":76,"ppp":0,"pppoe":0,"gre":
+o, "vlan":0,"vlan_qinq":0,"teredo"
+:0,"ipv4_in_ipv6":0,"ipv6_in_ipv6":0, "mpls":0, "avg_pkt_size": 154, "max_pkt_size" : 1518, "erspan":0}, "flow": {"memcap":0,"spare":10000, "emerg
+mode_entered":0, "emerg_mode_over":0, "tcp_reuse":0, "memuse" : 7074880}, "defrag": {"ipv4": {"fragments":0, "reassembled":0, "timeouts": 0}, "ipv6": {"fragments":0, "reassembled":0,
+"timeouts":0}, "max_frag_hits":0}, "tcp":{"sessions":2231, "ssn_memcap_drop": 0, "pseudo": 54, "pseudo_failed":0, "invalid_checksum":0,"no_flow":0, "syn": 2231, "synack": 74, "rst": 2
+238, "segment_memcap_drop":0,"stream_depth_reached":0,"reassembly_gap": 45, "memuse" : 1355712, "reassembly_memuse" : 12320544}, "detect": {"alert": 153}, "flow_mgr": {"closed_pruned
+":2230, "new_pruned": 82, "est_pruned":0}, "dns": {"memuse":0, "memcap_state":0,"memcap_global":0}, "http": {"memuse":0, "memcap" :0}}}
+{"timestamp": "2026-09-05T12: 36:41.001989-0400", "event_type": "stats", "stats": {"uptime": 1953, "capture": {"kernel_packets": 10236, "kernel_drops":0}, "decoder": {"pkts": 10241, "b
+ytes": 1586024, "invalid": 45, "ipv4":9575, "ipv6" : 152, "ethernet" : 10241, "raw":0,"null":0,"sll":0,"tcp":9380,"udp":173,"sctp":0,"icmpv4":0,"icmpv6":76,"ppp":0,"pppoe":0,"gre":
+o, "vlan":0, "vlan_qinq":0,"teredo":0,"ipv4_in_ipv6":0, "ipv6_in_ipv6":0, "mpls":0, "avg_pkt_size":154, "max_pkt_size": 1518, "erspan":0}, "flow": {"memcap":0,"spare": 10000, "emerg
+_mode_entered":0, "emerg_mode_over":0,"tcp_reuse":0, "memuse" :7074880},"defrag": {"ipv4": {"fragments":0, "reassembled":0, "timeouts":0}, "ipv6": {"fragments":0, "reassembled":0,
+"timeouts":0}, "max_frag_hits":0}, "tcp":{"sessions": 2231, "ssn_memcap_drop":0, "pseudo": 54, "pseudo_failed":0, "invalid_checksum":0, "no_flow":0, "syn": 2231, "synack": 74, "rst":2
+238, "segment_memcap_drop":0, "stream_depth_reached":0, "reassembly_gap": 45, "memuse" : 1355712, "reassembly_memuse" : 12320544}, "detect" : {"alert": 153}, "flow_mgr": {"closed_pruned
+":2230, "new_pruned":82, "est_pruned":0}, "dns":{"memuse":0, "memcap_state":0, "memcap_global":0}, "http":{"memuse":0, "memcap":0}}}
+
+,"stats": {"uptime": 1924, "capture" : {"kernel_packets": 10198, "kernel_drops":0}, "decoder" : {"pkts" : 10199, "b
