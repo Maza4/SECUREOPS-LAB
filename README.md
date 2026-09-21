@@ -35,7 +35,7 @@ The lab was implemented using **Oracle VirtualBox** with security test traffic p
 | **Kali Linux**            | Attacker Simulation        | Reconnaissance, scanning and controlled attack simulation               |
 | **Python 3**              | Security Automation        | Log parsing and malicious IP extraction                                 |
 | **Bash / UFW**            | Containment                | Automated firewall blocking of identified IP addresses                  |
-| **Wireshark / Nmap**      | Network Analysis           | Packet inspection, reconnaissance and network activity analysis         |
+| **Nmap**      | Network Analysis           | Packet inspection, reconnaissance and network activity analysis         |
 
 ## 🛡️ Skills Demonstrated
 
